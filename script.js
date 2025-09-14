@@ -5,7 +5,7 @@ const password = document.getElementById("password")
 const confirmpassword = document.getElementById("confirmpassword")
 const togglePassword = document.querySelectorAll(".toggle-password");
 const input = document.querySelectorAll("input");
-// Password requirement checklist logic
+// // Password requirement checklist logic
 const reqList = document.getElementById('password-requirements');
 const reqLength = document.getElementById('req-length');
 const reqUppercase = document.getElementById('req-uppercase');
@@ -57,9 +57,10 @@ password.addEventListener('input', function() {
     } else {
         reqList.style.display = 'none';
     }
+});
 
 
-
+// Toggle password visibility
 togglePassword.forEach(toggle => {
     toggle.addEventListener("click", () => {
         const input = toggle.parentElement.querySelector('input');
@@ -73,7 +74,6 @@ togglePassword.forEach(toggle => {
     });
 });
   
-});
 
 
 
@@ -87,7 +87,7 @@ form.addEventListener("submit",function(e){
     if(requiredValue){
         const isUsernameValid =checkLength(username,3, 15);
         const isEmailValid =checkEmail(email);
-        // const isPasswordValid = checkLength(password, 6, 25);
+        const isPasswordValid = checkLength(password, 6, 25);
         const isPasswordMatch = checkPasswordMatch(password, confirmpassword);
 
         isFormValid = isUsernameValid && isEmailValid && isPasswordValid &&isPasswordMatch;
@@ -158,12 +158,12 @@ function formattedName(input){
 
 
 function showError(input,message){
-    const formGroup = input.parentElement
+  const formGroup = input.closest('.formgroup');
     formGroup.className ="formgroup error"
     const small = formGroup.querySelector("small");
     small.innerText = message
 }
 function showSuccess(input){
-    const formGroup = input.parentElement
+  const formGroup = input.closest('.formgroup');
     formGroup.className ="formgroup success"
 }

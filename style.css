@@ -48,6 +48,10 @@ input{
     font-size: 0.9rem;
     
 }
+.password-wrapper{
+    /* background-color: red; */
+    position: relative;
+}
 
 
 input:focus{
@@ -58,7 +62,7 @@ input:focus{
 .toggle-password{
     position: absolute;
     right: 10px;
-    top: 38px;
+    top: 10px;
     cursor: pointer;
     color: #888;
     user-select: none;
