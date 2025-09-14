@@ -3,6 +3,78 @@ const username = document.getElementById("username")
 const email = document.getElementById("email")
 const password = document.getElementById("password")
 const confirmpassword = document.getElementById("confirmpassword")
+const togglePassword = document.querySelectorAll(".toggle-password");
+const input = document.querySelectorAll("input");
+// Password requirement checklist logic
+const reqList = document.getElementById('password-requirements');
+const reqLength = document.getElementById('req-length');
+const reqUppercase = document.getElementById('req-uppercase');
+const reqNumber = document.getElementById('req-number');
+const reqSpecial = document.getElementById('req-special');
+
+password.addEventListener('input', function() {
+    const value = password.value;
+    let validCount = 0;
+    // At least 8 characters
+    if (value.length >= 8) {
+        reqLength.classList.remove('invalid');
+        reqLength.classList.add('valid');
+        validCount++;
+    } else {
+        reqLength.classList.remove('valid');
+        reqLength.classList.add('invalid');
+    }
+    // At least one uppercase letter
+    if (/[A-Z]/.test(value)) {
+        reqUppercase.classList.remove('invalid');
+        reqUppercase.classList.add('valid');
+        validCount++;
+    } else {
+        reqUppercase.classList.remove('valid');
+        reqUppercase.classList.add('invalid');
+    }
+    // At least one number
+    if (/[0-9]/.test(value)) {
+        reqNumber.classList.remove('invalid');
+        reqNumber.classList.add('valid');
+        validCount++;
+    } else {
+        reqNumber.classList.remove('valid');
+        reqNumber.classList.add('invalid');
+    }
+    // At least one special character
+    if (/[^A-Za-z0-9]/.test(value)) {
+        reqSpecial.classList.remove('invalid');
+        reqSpecial.classList.add('valid');
+        validCount++;
+    } else {
+        reqSpecial.classList.remove('valid');
+        reqSpecial.classList.add('invalid');
+    }
+    // Show checklist only if not all requirements are met and user has typed something
+    if (value.length > 0 && validCount < 4) {
+        reqList.style.display = 'block';
+    } else {
+        reqList.style.display = 'none';
+    }
+
+
+
+togglePassword.forEach(toggle => {
+    toggle.addEventListener("click", () => {
+        const input = toggle.parentElement.querySelector('input');
+        if (input.type === "password") {
+            input.type = "text";
+            toggle.classList.replace("fa-eye-slash", "fa-eye");
+        } else {
+            input.type = "password";
+            toggle.classList.replace("fa-eye", "fa-eye-slash");
+        }
+    });
+});
+  
+});
+
 
 
 form.addEventListener("submit",function(e){
@@ -15,7 +87,7 @@ form.addEventListener("submit",function(e){
     if(requiredValue){
         const isUsernameValid =checkLength(username,3, 15);
         const isEmailValid =checkEmail(email);
-        const isPasswordValid = checkLength(password, 6, 25);
+        // const isPasswordValid = checkLength(password, 6, 25);
         const isPasswordMatch = checkPasswordMatch(password, confirmpassword);
 
         isFormValid = isUsernameValid && isEmailValid && isPasswordValid &&isPasswordMatch;
