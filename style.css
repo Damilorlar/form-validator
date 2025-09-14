@@ -150,16 +150,7 @@ button:hover{
 }
 
 
-#password-requirements li {
-  padding-left: 1.4em;
- 
-}
-#password-requirements li.valid::before {
-  color: #27ae60;
-}
-#password-requirements li.invalid::before {
-  color: #e74c3c;
-}
+
 
 
 }
